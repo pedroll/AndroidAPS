@@ -46,7 +46,7 @@ public class PersistentNotificationPlugin extends PluginBase {
 
     public static final String CHANNEL_ID = "AndroidAPS-Ongoing";
 
-    private static final int ONGOING_NOTIFICATION_ID = 4711;
+    public static final int ONGOING_NOTIFICATION_ID = 4711;
     private final Context ctx;
 
     public PersistentNotificationPlugin(Context ctx) {
@@ -63,7 +63,11 @@ public class PersistentNotificationPlugin extends PluginBase {
     protected void onStart() {
         MainApp.bus().register(this);
         createNotificationChannel();
-        updateNotification();
+        if (Build.VERSION.SDK_INT >= 26) {
+            MainApp.instance().startForegroundService(new Intent(MainApp.instance(), DummyService.class));
+        } else {
+            updateNotification();
+        }
         super.onStart();
     }
 

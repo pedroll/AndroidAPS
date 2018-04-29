@@ -140,7 +140,7 @@ public class NSClientPlugin extends PluginBase {
         boolean newAllowedState = true;
 
         if (!ev.wifiConnected && wifiOnly) newAllowedState = false;
-        if (ev.wifiConnected && !allowedSSIDs.isEmpty() && !allowedSSIDs.contains(ev.ssid))
+        if (ev.wifiConnected && !allowedSSIDs.trim().isEmpty() && !allowedSSIDs.contains(ev.ssid))
             newAllowedState = false;
         if (!allowRoaming && ev.roaming) newAllowedState = false;
 

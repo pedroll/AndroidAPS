@@ -49,7 +49,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                 if (wifiManager != null) {
                     WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                     if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
-                        event.ssid = wifiInfo.getSSID();
+                        event.ssid = wifiInfo.getSSID().replace("SSID: ","").replaceAll("\"","");
                     }
                     log.debug("NETCHANGE: Wifi connected. SSID: " + event.ssid);
                 }
